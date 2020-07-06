@@ -11,6 +11,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-18.04, windows-latest]
 
@@ -20,7 +21,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release -G Ninja
+        cmake .. -DCMAKE_BUILD_TYPE=Release
     - name: build
       run: |
         cd build
