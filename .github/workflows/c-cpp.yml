@@ -25,4 +25,8 @@ jobs:
     - name: build
       run: |
         cd build
-        cmake --build .
+        cmake --build . --config Release --target all
+    - name: test
+      run: |
+        cd build
+        ctest -C Release
