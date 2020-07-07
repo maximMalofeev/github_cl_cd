@@ -13,22 +13,27 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install conan
+      shell: cmd
       run: |
         pip install conan
         conan --version
     - name: install ninja
+      shell: cmd
       run: choco install ninja
     - name: configure
+      shell: cmd
       run: |
         mkdir build
         cd build
-        & "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+        "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
         cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=cl -G Ninja
     - name: build
+      shell: cmd
       run: |
         cd build
         cmake --build . --config Release
     - name: test
+      shell: cmd
       run: |
         cd build
         ctest -C Release
