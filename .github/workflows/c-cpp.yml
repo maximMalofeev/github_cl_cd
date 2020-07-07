@@ -42,7 +42,7 @@ jobs:
         sudo ln -s ~/.local/bin/conan /usr/local/bin/conan
         conan --version
     - name: install ninja
-      run: apt install ninja-build
+      run: sudo apt install ninja-build
     - name: configure
       run: |
         mkdir build
