@@ -16,11 +16,13 @@ jobs:
       run: |
         pip install conan
         conan --version
+    - name: install ninja
+      run: choco install ninja
     - name: configure
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release
+        cmake .. -DCMAKE_BUILD_TYPE=Release -G Ninja
     - name: build
       run: |
         cd build
