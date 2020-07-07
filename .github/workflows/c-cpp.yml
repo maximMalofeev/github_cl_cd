@@ -17,6 +17,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: conan
+      run: |
+        pip install conan
+        source ~/.profile
+        conan --version
     - name: configure
       run: |
         mkdir build
