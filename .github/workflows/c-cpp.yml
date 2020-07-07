@@ -12,43 +12,43 @@ jobs:
     steps:
       -uses: actions/checkout@v2
       -name: install conan
-      run: |
-        pip install conan
-        conan --version
+       run: |
+         pip install conan
+         conan --version
       -name: configure
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release
+       run: |
+         mkdir build
+         cd build
+         cmake .. -DCMAKE_BUILD_TYPE=Release
       -name: build
-      run: |
-        cd build
-        cmake --build . --config Release
+       run: |
+         cd build
+         cmake --build . --config Release
       -name: test
-      run: |
-        cd build
-        ctest -C Release
+       run: |
+         cd build
+         ctest -C Release
 
   linux:
     runs-on: ubuntu-18.04
     steps:
       -uses: actions/checkout@v2
       -name: install conan
-      run: |
-        pip install conan
-        source ~/.profile
-        sudo ln -s ~/.local/bin/conan /usr/local/bin/conan
-        conan --version
+       run: |
+         pip install conan
+         source ~/.profile
+         sudo ln -s ~/.local/bin/conan /usr/local/bin/conan
+         conan --version
       -name: configure
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release
+       run: |
+         mkdir build
+         cd build
+         cmake .. -DCMAKE_BUILD_TYPE=Release
       -name: build
-      run: |
-        cd build
-        cmake --build . --config Release
+       run: |
+         cd build
+         cmake --build . --config Release
       -name: test
-      run: |
-        cd build
-        ctest -C Release
+       run: |
+         cd build
+         ctest -C Release
