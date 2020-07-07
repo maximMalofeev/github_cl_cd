@@ -41,11 +41,13 @@ jobs:
         source ~/.profile
         sudo ln -s ~/.local/bin/conan /usr/local/bin/conan
         conan --version
+    - name: install ninja
+      run: apt install ninja-build
     - name: configure
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release
+        cmake .. -DCMAKE_BUILD_TYPE=Release -G Ninja
     - name: build
       run: |
         cd build
