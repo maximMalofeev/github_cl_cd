@@ -1,3 +1,6 @@
-#include <iostream>
+#define CATCH_CONFIG_MAIN
+#include <catch2/catch.hpp>
 
-int main(int argc, char const *argv[]) { return 0; }
+TEST_CASE("Simple test"){
+  REQUIRE(1 != 2);
+}
