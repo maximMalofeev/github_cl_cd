@@ -18,9 +18,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: conan
+      if: ${{ runner.os }} == Linux
       run: |
         pip install conan
         source ~/.profile
+        conan --version
+      if: ${{ runner.os }} == Windows
+      run: |
+        pip install conan
         conan --version
     - name: configure
       run: |
