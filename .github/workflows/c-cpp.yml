@@ -23,6 +23,7 @@ jobs:
         pip install conan
         source ~/.profile
         conan --version
+        sudo ln -s ~/.local/bin/conan /usr/local/bin/conan
     - name: conan Windows
       if: ${{ runner.os == 'Windows' }}
       run: |
