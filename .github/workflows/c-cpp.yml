@@ -7,38 +7,48 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-18.04, windows-latest]
-
+  windows:
+    runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: conan Linux
-      if: ${{ runner.os == 'Linux' }}
+      -uses: actions/checkout@v2
+      -name: install conan
+      run: |
+        pip install conan
+        conan --version
+      -name: configure
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+      -name: build
+        run: |
+          cd build
+          cmake --build . --config Release
+      -name: test
+        run: |
+          cd build
+          ctest -C Release
+
+  linux:
+    runs-on: ubuntu-18.04
+    steps:
+      -uses: actions/checkout@v2
+      -name: install conan
       run: |
         pip install conan
         source ~/.profile
-        conan --version
         sudo ln -s ~/.local/bin/conan /usr/local/bin/conan
-    - name: conan Windows
-      if: ${{ runner.os == 'Windows' }}
-      run: |
-        pip install conan
         conan --version
-    - name: configure
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release
-    - name: build
-      run: |
-        cd build
-        cmake --build . --config Release
-    - name: test
-      run: |
-        cd build
-        ctest -C Release
+      -name: configure
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+      -name: build
+        run: |
+          cd build
+          cmake --build . --config Release
+      -name: test
+        run: |
+          cd build
+          ctest -C Release
